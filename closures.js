@@ -48,8 +48,8 @@ Create a callJake function that when invoked with '435-555-9248' returns 'Callin
 in your console. */
 
   //Code Here
-var makeCall = callFriend('Jake');
-makeCall('435-555-9248');
+var callJake = callFriend('Jake');
+callJake('435-555-9248');
 
 
 
