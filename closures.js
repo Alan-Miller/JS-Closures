@@ -1,39 +1,50 @@
-var outer = function(){
+/******************************************************************************\
+	#PROBLEM-01
+\******************************************************************************/
+
+function outer() {
   var name = 'Tyler';
-  return function(){
+  return function() {
     return 'The original name was ' + name;
   }
-};
+}
 
-
-//////////////////PROBLEM 1////////////////////
-
-// Above you're given a function that returns another function which has a closure over the name variable.
-// Invoke outer saving the return value into another variable called 'inner'.
+/****** INSTRUCTIONS PROBLEM 1 ******/
+/* Above you're given a function that returns another function which has a
+closure over the name variable. Invoke outer saving the return value into
+another variable called 'inner'. */
 
 // Code Here
 
-
 //Once you do that, invoke inner.
 
-  //Code Here
+//Code Here
 
 
 
-//////////////////PROBLEM 2////////////////////
 
 
-var callFriend = function(){
-  var friend = 'Jake';
-  function callF(number){
-    return 'Calling ' + friend + ' at ' + number;
+
+
+
+
+
+/******************************************************************************\
+	#PROBLEM-02
+\******************************************************************************/
+
+
+function callFriend(name) {
+  function dial(number) {
+    return 'Calling ' + name + ' at ' + number
   }
-  return callF;
-};
+  return dial
+}
 
-
-// Above you're given a callFriend function that returns another function.
-// Create a makeCall function that when invoked logs  'Calling Jake at 435-215-9248' in your console.
+/****** INSTRUCTIONS PROBLEM 2 ******/
+/* Above you're given a callFriend function that returns the dial function.
+Create a callJake function that when invoked with '435-555-9248' returns 'Calling Jake at 435-555-9248'
+in your console. */
 
   //Code Here
 
@@ -43,13 +54,15 @@ var callFriend = function(){
 
 
 
-//////////////////PROBLEM 3////////////////////
 
 
+/******************************************************************************\
+	#PROBLEM-03
+\******************************************************************************/
 
-/*
-  Write a function called makeCounter that makes the following code work properly.
-*/
+/****** INSTRUCTIONS PROBLEM 3 ******/
+/* Write a function called makeCounter that makes the following code work
+properly. */
 
 //Code Here
 
@@ -62,14 +75,26 @@ var callFriend = function(){
 
 
 
-//////////////////PROBLEM 4////////////////////
 
 
-// Inside the function called counterFactory
-// return two functions that implement up/down counter.
-// The first function is called inc, this function is responsible for incrementing the value once
-// The second function is called dec, this function is responsible for decrementing the value by one
-// You will need to use the module pattern to achieve this.
+
+
+
+
+
+/******************************************************************************\
+	#PROBLEM-04
+\******************************************************************************/
+
+/****** INSTRUCTIONS PROBLEM 4 ******/
+/* Inside the function called counterFactory return two functions that implement
+up/down counter. The first function is called inc, this function is responsible
+for incrementing the value once. The second function is called dec, this
+function is responsible for decrementing the value by one. You will need to use
+the module pattern to achieve this. 
+Information on the module pattern available here: 
+http://stackoverflow.com/questions/17776940/javascript-module-pattern-with-example?answertab=votes#tab-top
+*/
 
 function counterFactory(value) {
 
@@ -82,96 +107,138 @@ function counterFactory(value) {
 
 
 counter = counterFactory(10);
+// counter.inc() // 11
+// counter.inc() // 12
+// counter.inc() // 13
+// counter.dec() // 12
 
 
 
 
-//////////////////PROBLEM 5////////////////////
 
 
-// Inside the motivation function create another function called message that will return 'You're doing awesome, keep it up firstname lastname.'
-
-  function motivation(firstname, lastname){
-
-    var welcomeText = 'You\'re doing awesome, keep it up ';
-
-    // code message function here.
 
 
-    //Uncommment this to return the value of your invoked message function
 
-    //return message()
+
+/******************************************************************************\
+	#PROBLEM-05
+\******************************************************************************/
+
+/****** INSTRUCTIONS PROBLEM 5 ******/
+/* Inside the motivation function create another function called message that
+will return 'You're doing awesome, keep it up firstname lastname.' */
+
+function motivation(firstname, lastname) {
+
+  var welcomeText = 'You\'re doing awesome, keep it up ';
+
+  // code message function here.
+
+
+  //Uncommment this to return the value of your invoked message function
+  //return message();
+
+}
+
+motivation('Billy', 'Bob'); // 'You're doing awesome keep it up Billy Bob.
+
+
+
+
+
+
+
+
+
+
+/******************************************************************************\
+	#PROBLEM-06
+\******************************************************************************/
+
+/****** INSTRUCTIONS PROBLEM 6 ******/
+/* Inside the module's return object create a publicMethod function that
+invokes privateMethod. Invoke this by calling module.publicMethod(); outside
+the module scope */
+
+var module = (function() {
+  var person = {
+    name: "phillip",
+    age: 29,
+    location: "Utah"
+  };
+
+  function privateMethod(){
+    return "Hi, I'm " + person.name + ", age " + person.age + " from " + person.location;
   }
 
-  motivation('Billy', 'Bob'); // 'Your doing awesome keep it up Billy Bob
+  // Anything that is being returned is made public and can be invoked from
+  // outside our lexical scope
+  return {
+    // Code here.
+  };
+
+})();
 
 
 
-//////////////////PROBLEM 6////////////////////
+/******************************************************************************\
+ #PROBLEM-07
+ \******************************************************************************/
+/****** INSTRUCTIONS PROBLEM 7 ******/
+/* Here we are given three arrays: an array of friends, an array of second-level
+friends (friends of friends), and an array of all users. These arrays may share
+users. Write a function that takes in our existing friends and returns
+a function that will tell us if a given user is not already a friend. */
+var friends = ["Tom", "Dick", "Harry"];
+var secondLevelFriends = ["Anne", "Harry", "Quinton"];
+var allUsers = ["Tom", "Dick", "Harry", "Anne", "Quinton", "Katie", "Mary"];
 
-// Inside the return create a publicMethod property that is a function that invokes privateMethod. After you create the privateMethod
-// Invoke it by calling module.publicMethod(); outside the module scope
+function findPotentialFriends(existingFriends) {
 
-  var module = (function() {
-    var person = {
-      name: "phillip",
-      age: 29,
-      location: 'Utah'
-    };
+}
 
-    var privateMethod = function(){
-      return "Hi, I'm " + person.name + ", age " + person.age + " from " + person.location;
-    };
-
-    // Anything that is being returned is made public and can be invoked from outside our lexical scope
-
-    return {
-      // Code here.
-    };
-
-  })();
-
-//Uncomment this after you create your public method
-//   module.publicMethod();
+var isNotAFriend = findPotentialFriends( friends );
+// isNotAFriend(allUsers[0]); // false
+// isNotAFriend(secondLevelFriends[2]); // true
 
 
+/******************************************************************************\
+ #PROBLEM-07 -- BLACK DIAMOND
+ \******************************************************************************/
+/* Using your findPotentialFriends function from above and the Array.filter
+method, find all potential second level friends as well as potential friends
+from allUsers. */
 
-//////////////////PROBLEM 7////////////////////
-// Here we have a for loop that will iterate as long as i is less than or equal to 5. What we need to do is console.log(i)
-// So that it logs ( 0 then 1 then 2 then 3, etc). Run this code in your console to see what the output is.
+var potentialSecondLevelFriends = "?";
+var allPotentialFriends = "?";
 
+
+/******************************************************************************\
+	#PROBLEM-08
+\******************************************************************************/
+
+/****** INSTRUCTIONS PROBLEM 8 ******/
+/* Here we have a for loop that will iterate as long as i is less than or equal
+to 5. What we need to do is console.log(i) so that it logs like so:
+ 0 second after call - log 0
+ 1 seconds after call - log 1
+ 2 seconds after call - log 2
+ 3 seconds after call - log 3
+ 4 seconds after call - log 4
+ 5 seconds after call - log 5
+ However, because each call to console.log occurs after the loop has finished,
+ the value of i has changed before the console.log executes. We'll need to use
+ a closure to preserve a reference to i at the time of execution.
+
+ Fix the code below to log the desired output.
+ */
 
 function timeOutCounter() {
   for (var i = 0; i <= 5; i++) {
     setTimeout(function() {
-      console.log(i);
-    }, i * 1000)
-  }
-
-  function newScope(i) {
-    console.log(i)
+    	console.log(i)
+	}, i * 1000)
   }
 }
 timeOutCounter();
-  // To make this code work you will need to create a new scope for every iteration.
-
-
-
-
-
-//////////////////PROBLEM 8////////////////////
-
-var funcArray = [];
-
-/*
-  Make the following code work
-
-  funcArray[0]() //0
-  funcArray[1]() //1
-  funcArray[2]() //2
-  funcArray[3]() //3
-  funcArray[4]() //4
-  funcArray[5]() //5
-
-  *Hint: Don't let this fool you. Break down what's really happening here.
-*/
