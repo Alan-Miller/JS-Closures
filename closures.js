@@ -2,7 +2,7 @@ var outer = function(){
   var name = 'Tyler';
   return function(){
     return 'The original name was ' + name;
-  }
+  };
 };
 
 
@@ -11,12 +11,12 @@ var outer = function(){
 // Above you're given a function that returns another function which has a closure over the name variable.
 // Invoke outer saving the return value into another variable called 'inner'.
 
-// Code Here
+var inner = outer();
 
 
 //Once you do that, invoke inner.
 
-  //Code Here
+inner();
 
 
 
@@ -36,7 +36,8 @@ var callFriend = function(){
 // Create a makeCall function that when invoked logs  'Calling Jake at 435-215-9248' in your console.
 
   //Code Here
-
+var makeCall = callFriend();
+makeCall(435-215-9248);
 
 
 
@@ -51,14 +52,22 @@ var callFriend = function(){
   Write a function called makeCounter that makes the following code work properly.
 */
 
-//Code Here
+function makeCounter () {
+  var total = 0;
+
+  function totalPlusPlus() {
+    total++;
+    return total;
+  }
+  return totalPlusPlus;
+}
 
 //Uncomment this once you make your function
-//   var count = makeCounter();
-//   count(); // 1
-//   count(); // 2
-//   count(); // 3
-//   count(); // 4
+  var count = makeCounter();
+  count(); // 1
+  count(); // 2
+  count(); // 3
+  count(); // 4
 
 
 
@@ -73,15 +82,21 @@ var callFriend = function(){
 
 function counterFactory(value) {
 
-  // Code here.
-
+  var total = value;
 
   return {
-  }
+    inc: function() {
+      value++;
+      return value;
+    },
+    dec: function() {
+      value--;
+      return value;
+    }
+  };
 }
 
-
-counter = counterFactory(10);
+var counter = counterFactory(10);
 
 
 
@@ -95,12 +110,12 @@ counter = counterFactory(10);
 
     var welcomeText = 'You\'re doing awesome, keep it up ';
 
-    // code message function here.
-
+    function message() {
+      return welcomeText + firstname + " " + lastname + ".";
+    }
 
     //Uncommment this to return the value of your invoked message function
-
-    //return message()
+    return message();
   }
 
   motivation('Billy', 'Bob'); // 'Your doing awesome keep it up Billy Bob
@@ -126,13 +141,15 @@ counter = counterFactory(10);
     // Anything that is being returned is made public and can be invoked from outside our lexical scope
 
     return {
-      // Code here.
+      publicMethod: function() {
+        return privateMethod();
+      }
     };
 
   })();
 
 //Uncomment this after you create your public method
-//   module.publicMethod();
+  module.publicMethod();
 
 
 
@@ -143,17 +160,39 @@ counter = counterFactory(10);
 
 function timeOutCounter() {
   for (var i = 0; i <= 5; i++) {
-    setTimeout(function() {
-      console.log(i);
-    }, i * 1000)
+    setTimeout(function(iEntersHere) {
+      return function() {
+      	newScope(iEntersHere);
+      };
+    }(i), i * 1000)
   }
 
-  function newScope(i) {
-    console.log(i)
-  }
+	function newScope(iIsLoggedHere) {
+  		console.log(iIsLoggedHere);
+	}
 }
+
 timeOutCounter();
-  // To make this code work you will need to create a new scope for every iteration.
+
+// Solution I worked out with Brad's help:
+
+// function timeOutCounter() {
+//   for (var i = 0; i <= 5; i++) {
+//     setTimeout(function(i) {
+//       // console.log(i);
+//       // var banana = i;
+//       return function() {
+//         newScope(i);
+//       };
+//     }(i), i * 1000);
+//   }
+// }
+//
+// function newScope(i) {
+//   console.log(i);
+// }
+
+
 
 
 
@@ -163,15 +202,24 @@ timeOutCounter();
 
 var funcArray = [];
 
-/*
-  Make the following code work
+function indexerMachineMaker() {
 
-  funcArray[0]() //0
-  funcArray[1]() //1
-  funcArray[2]() //2
-  funcArray[3]() //3
-  funcArray[4]() //4
-  funcArray[5]() //5
+	function indexerMachine(index) {
+		return function() {
+			return index;
+		};
+	}
 
-  *Hint: Don't let this fool you. Break down what's really happening here.
-*/
+	for (var i = 0; i <= 5; i++) {
+		funcArray[i] = indexerMachine(i);
+	}
+}
+
+indexerMachineMaker();
+
+  funcArray[0](); //0
+  funcArray[1](); //1
+  funcArray[2](); //2
+  funcArray[3](); //3
+  funcArray[4](); //4
+  funcArray[5](); //5
