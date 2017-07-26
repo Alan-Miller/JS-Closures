@@ -111,15 +111,23 @@ function counterFactory(value) {
 
 
   return {
+    inc: function() {
+      value++;
+      return value;
+    },
+    dec: function() {
+      value--;
+      return value;
+    }
   }
 }
 
 
 counter = counterFactory(10);
-// counter.inc() // 11
-// counter.inc() // 12
-// counter.inc() // 13
-// counter.dec() // 12
+counter.inc() // 11
+counter.inc() // 12
+counter.inc() // 13
+counter.dec() // 12
 
 
 
@@ -143,14 +151,16 @@ function motivation(firstname, lastname) {
   var welcomeText = 'You\'re doing awesome, keep it up ';
 
   // code message function here.
-
+  var message = function() {
+    return `You're doing awesome, keep it up ${firstname} ${lastname}.`;
+  }
 
   //Uncommment this to return the value of your invoked message function
-  //return message();
+  return message();
 
 }
 
-motivation('Billy', 'Bob'); // 'You're doing awesome keep it up Billy Bob.
+motivation('Billy', 'Bob'); // 'You're doing awesome, keep it up Billy Bob.
 
 
 
@@ -185,10 +195,14 @@ var module = (function() {
   // outside our lexical scope
   return {
     // Code here.
+    publicMethod: function() {
+      return privateMethod();
+    }
   };
 
 })();
 
+module.publicMethod();
 
 
 /******************************************************************************\
@@ -204,7 +218,9 @@ var secondLevelFriends = ["Anne", "Harry", "Quinton"];
 var allUsers = ["Tom", "Dick", "Harry", "Anne", "Quinton", "Katie", "Mary"];
 
 function findPotentialFriends(existingFriends) {
-
+  return function(friend) {
+    return existingFriends.indexOf(friend) >= 0;
+  }
 }
 
 var isNotAFriend = findPotentialFriends( friends );
@@ -245,9 +261,22 @@ to 5. What we need to do is console.log(i) so that it logs like so:
 
 function timeOutCounter() {
   for (var i = 0; i <= 5; i++) {
-    setTimeout(function() {
-    	console.log(i)
-	}, i * 1000)
+    setTimeout((function(i) {
+    	return function() {
+        console.log(i)
+      }
+	})(i), i * 1000)
   }
 }
 timeOutCounter();
+
+
+// Alternatively, just switch var to let, which preserves block scope
+// function timeOutCounter() {
+//   for (let i = 0; i <= 5; i++) {
+//     setTimeout(function() {
+//     	console.log(i)
+// 	}, i * 1000)
+//   }
+// }
+// timeOutCounter();
