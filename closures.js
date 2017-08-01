@@ -36,13 +36,13 @@ inner();
 
 
 function mamaBird(bird) {
-  function babyBird(adj) {
+  function egg(adj) {
     return 'Look what hatched! A ' + adj + ' baby ' + bird + '!';
   }
-  return babyBird;
+  return egg;
 }
 /****** INSTRUCTIONS PROBLEM 2 ******/
-/* Above you see a mamaBird function that returns a babyBird function.
+/* Above you see a mamaBird function that returns an egg function.
 Declare a variable called chicken, and in it store a function that returns 
 'Look what hatched! A little baby chicken!' when you invoke it with 'little'. */
 
