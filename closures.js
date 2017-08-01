@@ -35,23 +35,20 @@ inner();
 \******************************************************************************/
 
 
-function callFriend(name) {
-  function dial(number) {
-    return 'Calling ' + name + ' at ' + number
+function mamaBird(bird) {
+  function babyBird(adj) {
+    return 'Look what hatched! A ' + adj + ' baby ' + bird + '!';
   }
-  return dial
+  return babyBird;
 }
-
 /****** INSTRUCTIONS PROBLEM 2 ******/
-/* Above you're given a callFriend function that returns the dial function.
-Create a callJake function that when invoked with '435-555-9248' returns 'Calling Jake at 435-555-9248'
-in your console. */
+/* Above you see a mamaBird function that returns a babyBird function.
+Declare a variable called chicken, and in it store a function that returns 
+'Look what hatched! A little baby chicken!' when you invoke it with 'little'. */
 
   //Code Here
-var callJake = callFriend('Jake');
-callJake('435-555-9248');
-
-
+var chicken = mamaBird('chicken');
+chicken('little');
 
 
 
